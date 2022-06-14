@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:composition template="/templates/main.xhtml">
+
+
+
+<ui:define name ="content">
+
+	<p:panel header="Projekt Jezioro">
+
+		<h:form>
+            <p:panelGrid columns="2" cellpadding="5" styleClass="bottom-space">
+            
+                <p:outputLabel for="nazwa_ryby" value="nazwa_ryby" />
+                <p:inputText id="nazwa_ryby" value="#{rybyBB.ryby.nazwa_ryby}" required="true" requiredMessage="podaj nazwe ryby">
+				</p:inputText>
+			
+				<p:outputLabel for = "nrStawu" value = "nr Stawu"/>
+					<p:selectOneMenu id = "nrStawu" value="#{rybyBB.ryby.nrStawu}"  required = "true" requiredMessage = "Nie podano stawu">
+						<f:selectItem itemLabel="---" itemValue=""/>
+	                    <f:selectItem itemLabel="1" itemValue="1"/>
+	                    <f:selectItem itemLabel="2" itemValue="2"/>
+	                    <f:selectItem itemLabel="3" itemValue="3"/>
+				</p:selectOneMenu>
+
+
+                <p:outputLabel for="cenaZaKilogram" value="cenaZaKilogram:" />
+                <p:inputText id="cenaZaKilogram" value="#{rybyBB.ryby.cenaZaKilogram}" required="true" requiredMessage="wprowadz cene" >
+				</p:inputText>
+                
+                
+                
+            </p:panelGrid>
+            
+            <p:messages id="msg"/>
+            
+            <p:commandButton value="Dodaj rybe" action="#{rybyBB.addfish()}" update="msg" />
+            
+			
+				
+				
+				
+        </h:form>
+        
+        <h:form>
+  			<p:commandButton value="Wróć" action="panel?faces-redirect=true" />
+		 </h:form>
+		 
+	</p:panel>
+	
+</ui:define>
+
+
+	
+</ui:composition>
+
+</html>

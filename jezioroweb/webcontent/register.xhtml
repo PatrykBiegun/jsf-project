@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:composition template="/templates/main.xhtml">
+
+
+
+<ui:define name ="content">
+
+	<p:panel header="jezioro projekt">
+
+		<h:form>
+            <p:panelGrid columns="2" cellpadding="5" styleClass="bottom-space">
+            
+                <p:outputLabel for="login" value="login:" />
+                <p:inputText id="login" value="#{registerBB.uzytkownicy.login}" required="true" requiredMessage="wprowadz login" validatorMessage = "Login może mieć maksymalnie 8 znaków.">
+                <f:validateLength maximum="8"/>
+				</p:inputText>
+			
+
+
+                <p:outputLabel for="haslo" value="haslo:" />
+                <p:password id="haslo" value="#{registerBB.uzytkownicy.haslo}" required="true" requiredMessage="wprowadz hasło" validatorMessage = "Hasło musi mieć minimalnie 7 znaków.">
+                <f:validateLength minumum="7"/>
+				</p:password>
+                
+                
+                <p:outputLabel for="imie" value="imie:" />
+                <p:inputText id="imie" value="#{registerBB.uzytkownicy.imie}" required="true" requiredMessage="wprowadz imie"/>
+                <p:outputLabel for="nazwisko" value="nazwisko:" />
+                <p:inputText id="nazwisko" value="#{registerBB.uzytkownicy.nazwisko}" required="true" requiredMessage="wprowadz nazwisko"/>
+                <p:outputLabel for="pesel" value="pesel:" />
+                
+                <p:inputText id="pesel" value="#{registerBB.uzytkownicy.pesel}" required="true" requiredMessage="wprowadz pesel" validatorMessage = "pesel musi mieć 11 znaków">
+                <f:validateLength maximum="11" minimum="11"/>
+				</p:inputText>
+               
+                <p:outputLabel for="email" value="email:" />
+                <p:inputText id="email" value="#{registerBB.uzytkownicy.email}" required="true" requiredMessage="brak email" validatorMessage = "nieprawidłowy email" >
+                <f:validateRegex pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+                </p:inputText>
+                
+            </p:panelGrid>
+            
+            <p:messages id="msg"/>
+            
+            <p:commandButton value="Rejestracja" action="#{registerBB.saveData()}" update="msg" />
+            
+			
+				
+				
+				
+        </h:form>
+        
+        <h:form>
+  			<p:commandButton value="Wróć" action="index?faces-redirect=true" />
+		 </h:form>
+		 
+	</p:panel>
+	
+</ui:define>
+
+
+	
+</ui:composition>
+
+</html>

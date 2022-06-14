@@ -1,0 +1,22 @@
+body{
+	font-family: 'Century Gothic',helvetica,verdana,arial;
+	background: url("../img/background.jpg.xhtml?ln=template") no-repeat center center fixed;
+	background-size: cover;
+	margin:0;
+	
+	width: 1000px;
+    margin: auto;
+}
+
+.bottom-space{
+	margin-bottom: 2em;
+}
+
+.top-space{
+	margin-top: 2em;
+}
+
+#page_wrapper{
+	margin: 1em;
+	min-width: 700px;
+}

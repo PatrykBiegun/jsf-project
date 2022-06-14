@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/main.xhtml">
+
+	<ui:define name="title">
+	projekt java 
+</ui:define>
+
+	<ui:define name="content">
+
+		<p:panel header="jezioro projekt">
+
+		
+   
+        #{remoteClient.isUser()}
+       
+       		<h:form id="bla">
+				<p:menubar>
+
+					<p:menuitem value="Dodaj rybe" action="addfish.xhtml" />
+					<p:menuitem value="Wróć" action="panel.xhtml" />
+
+
+					<p:menuitem value="Wyloguj" action="#{loginBB.logout()}"
+						styleClass="ui-button-danger" />
+
+					<p:menuitem value="Zalogowany jako: #{remoteClient.details.login} " />
+					<p:menuitem value="Rola: #{remoteClient.isUser()}" />
+
+
+
+				</p:menubar>
+
+			</h:form>
+
+			<h:form>
+
+
+
+			</h:form>
+
+		</p:panel>
+
+		<p:panel header="Opcje Wyszukiwania">
+			<h:form>
+				<h:panelGrid if="grid" columns="2" cellpadding="7">
+					<h:outputLabel value="Nazwa" />
+					<p:inputText value="#{rybyBB.name}" />
+					<p:commandButton value="Szukaj" update="form-table" />
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
+
+		<h:form id="form-table">
+
+
+
+			<p:dataTable value="#{rybyBB.fullList}" var="i" rows="10"
+				paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+				rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="id" />
+					</f:facet>
+					<h:outputText value="#{i.ID_Ryby}" />
+				</p:column>
+
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nazwa ryby" />
+					</f:facet>
+					<h:outputText value="#{i.nazwa_ryby}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nr stawu" />
+					</f:facet>
+					<h:outputText value="#{i.nrStawu}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="cena za kilogram" />
+					</f:facet>
+					<h:outputText value="#{i.cenaZaKilogram}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Usuń" />
+					</f:facet>
+					<p:commandButton value="Usuń" action="#{rybyBB.deletefish(i)}"
+						styleClass="ui-button-danger" update="form-table">
+						<p:confirm type="popup" header="UWAGA"
+							message="Czy na pewno chcesz usunąć rybe?"
+							icon="pi pi-exclamation-triangle" />
+					</p:commandButton>
+				</p:column>
+
+
+
+			</p:dataTable>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+				responsive="true" width="350">
+				<p:commandButton value="Nie" type="button"
+					styleClass="ui-confirmdialog-no ui-button-flat" />
+				<p:commandButton value="Tak" type="button"
+					styleClass="ui-confirmdialog-yes" />
+			</p:confirmDialog>
+
+			<p:messages id="msgs" severity="info, warn" />
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>
